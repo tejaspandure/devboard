@@ -11,9 +11,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
+        
       - name: Docker setup [Login]
         uses: docker/login-action@4
         with:
           username: ${{ vars.DOCKERHUB_USERNAME}}
           password: ${{ secrets.DOCKERHUB_TOKEN}}
+      - name: Docker Build and push
+        uses: docker/build-push-action@v7
+        with:
+          push: true
+          tags: ${{ vars.DOCKERHUB_USERNAME}}/devboard-fe-master:latest
+          
         

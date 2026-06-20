@@ -1,0 +1,19 @@
+#Goal : Build the image for the devboard frontend and push to docker Hub
+name: CI
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+      - name: Docker setup [Login]
+        uses: docker/login-action@4
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME}}
+          password: ${{ secrets.DOCKERHUB_TOKEN}}
+        
